@@ -1,10 +1,68 @@
 import Card from '@/components/card'
 import CardSocial from '@/components/card/social';
+import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { IGithubProfile } from '@/interfaces/IGithubProfile';
 import Image from 'next/image'
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
+
 export default async function Home() {
+  const httpLink = createHttpLink({
+    uri: 'https://api.github.com/graphql',
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+      }
+    }
+  });
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache()
+  });
+
+  const { data } = await client.query({
+    query: gql`
+    {
+      user(login: "leolive1506") {
+        pinnedItems(first: 6) {
+          totalCount
+          edges {
+            node {
+              ... on Repository {
+                id
+                name
+                url
+                stargazerCount
+                description
+                nameWithOwner
+                languages (first: 6) {
+                  edges {
+                    node {
+                      id
+                      name
+                      color
+                    }
+                  }
+                }
+              }  
+            }
+            
+          }
+        }
+      }
+    }`
+  })
+
+  const { user } = data;
+  const pinnedItems = user.pinnedItems.edges.map(({ node }) => node)
+  console.log(pinnedItems[0])
+
   const response: IGithubProfile = await fetch('http://api.github.com/users/leolive1506').then(res => res.json())
 
   return (
@@ -31,7 +89,14 @@ export default async function Home() {
           </div>
         </Card>
         <Card className="mt-8 md:mt-0 md:ml-16">
-          {response.bio}
+          {pinnedItems.map(item => {
+            return (
+              <div>
+                <a key={item.id} href={item.url}>{item.name}</a>
+                <br></br>
+              </div>
+            )
+          })}
         </Card>
       </div>
     </main>
