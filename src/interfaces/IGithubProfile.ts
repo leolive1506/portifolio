@@ -1,0 +1,15 @@
+export interface IGithubProfile {
+  login: string,
+  avatar_url: string,
+  url: string,
+  html_url: string,
+  followers_url: string,
+  following_url: string,
+  subscriptions_url: string,
+  repos_url: string,
+  name: string,
+  location: string,
+  bio: string,
+  public_repos: number,
+  created_at: Date,
+}
