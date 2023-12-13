@@ -1,70 +1,22 @@
 import Card from '@/components/card'
 import CardSocial from '@/components/card/social';
-import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import { IGithubProfile } from '@/interfaces/IGithubProfile';
 import Image from 'next/image'
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { IPinnedRepositoriesGithubApi } from '@/interfaces/PinnedRepositoriesGithubApi';
+import { getApolloClient, queryPinnedItems } from '@/services/apollo';
 
 export default async function Home() {
-  const httpLink = createHttpLink({
-    uri: 'https://api.github.com/graphql',
-  });
-
-  const authLink = setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
-      }
-    }
-  });
-
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  });
+  const client = getApolloClient();
 
   const { data }: IPinnedRepositoriesGithubApi = await client.query({
-    query: gql`
-    {
-      user(login: "leolive1506") {
-        pinnedItems(first: 6) {
-          totalCount
-          edges {
-            node {
-              ... on Repository {
-                id
-                name
-                url
-                stargazerCount
-                description
-                nameWithOwner
-                languages (first: 6) {
-                  edges {
-                    node {
-                      id
-                      name
-                      color
-                    }
-                  }
-                }
-              }  
-            }
-            
-          }
-        }
-      }
-    }`
+    query: queryPinnedItems()
   })
 
   const { user } = data;
   const pinnedItems = user.pinnedItems.edges.map(({ node }) => node)
-
   const response: IGithubProfile = await fetch('http://api.github.com/users/leolive1506').then(res => res.json())
 
-  const bg = "bg-[#e34c26]";
   return (
     <main className="min-h-screen px-4 py-12 md:p-24 max-w-screen-xl mx-auto block">
       {/* <div className="my-12 grid grid-cols-1 md:grid-cols-[300px_minmax(400px,_1fr)] w-full md-w-auto"> */}

@@ -3,14 +3,15 @@ export interface IPinnedRepositoriesGithubApi {
     user: {
       pinnedItems: {
         totalCount: number,
-        edges: IPinnedItem[],
+        edges: IPinnedItemResponse[],
       }
     }
 
   }
 }
 
-interface IPinnedItem {
+
+interface IPinnedItemResponse {
   node: {
     id: string,
     name: string,
@@ -22,6 +23,8 @@ interface IPinnedItem {
     }
   }
 }
+
+export type IPinnedItem = IPinnedItemResponse['node'];
 
 export interface IPinnedLanguages {
   node: {
