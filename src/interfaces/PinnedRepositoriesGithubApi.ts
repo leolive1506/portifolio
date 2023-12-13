@@ -1,4 +1,4 @@
-export interface IResponseQueryPinnedGithubApi {
+export interface IPinnedRepositoriesGithubApi {
   data: {
     user: {
       pinnedItems: {

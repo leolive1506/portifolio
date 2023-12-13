@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import { IGithubProfile } from '@/interfaces/IGithubProfile';
 import Image from 'next/image'
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { IResponseQueryPinnedGithubApi } from '@/interfaces/GetPinnedGithubApi';
+import { IPinnedRepositoriesGithubApi } from '@/interfaces/PinnedRepositoriesGithubApi';
 
 export default async function Home() {
   const httpLink = createHttpLink({
@@ -26,7 +26,7 @@ export default async function Home() {
     cache: new InMemoryCache()
   });
 
-  const { data }: IResponseQueryPinnedGithubApi = await client.query({
+  const { data }: IPinnedRepositoriesGithubApi = await client.query({
     query: gql`
     {
       user(login: "leolive1506") {
