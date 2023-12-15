@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink, gql } from "@apollo/client
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
-  uri: process.env.GITHUP_API_URL,
+  uri: process.env.GITHUB_API_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
