@@ -1,5 +1,6 @@
 import Image from "next/image";
 import NavLink from "./nav-link/desktop";
+import { NAVIGATION } from "@/constants/header/links";
 
 export default function Desktop() {
   return (
@@ -16,10 +17,9 @@ export default function Desktop() {
           />
         </div>
         <ul className="flex gap-4 justify-center items-center">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/">Work</NavLink>
-          <NavLink href="/">About</NavLink>
-          <NavLink href="/">Contact</NavLink>
+          {NAVIGATION.map(nav => (
+            <NavLink key={nav.key} href={nav.href}>{nav.label}</NavLink>
+          ))}
         </ul>
         <div className="px-4 py-2 rounded-lg text-sm relative">
           {/* <div className="absolute w-full h-full right-0 top-0 blur-md">my profile</div> */}
