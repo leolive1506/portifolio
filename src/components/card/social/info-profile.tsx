@@ -10,7 +10,7 @@ export default async function InfoProfile() {
   const response: IGithubProfile = await fetch(process.env.GITHUB_PROFILE_API_URL ?? "").then(res => res.json())
 
   return (
-    <Card className="mt-[20%] md:mt-0">
+    <Card className="mt-[50%] md:mt-0">
       <div className="flex justify-center items-center flex-col w-full px-2">
         <div className="mt-[-50%]">
           <Image src={response.avatar_url} alt="leonardo" width={200} height={200} className="rounded-xl object-cover" />
