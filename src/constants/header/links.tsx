@@ -21,6 +21,6 @@ export enum LABELS {
 export const NAVIGATION = [
   { href: ROUTES.home, key: 'route-home', label: LABELS.home, icon: <FaHome className={className} /> },
   { href: ROUTES.work, key: 'route-work', label: LABELS.work, icon: <MdWorkHistory className={className} /> },
-  { href: ROUTES.about, key: 'route-about', label: LABELS.about, icon: <FcAbout className={className} /> },
+  // { href: ROUTES.about, key: 'route-about', label: LABELS.about, icon: <FcAbout className={className} /> },
   { href: ROUTES.contact, key: 'route-contact', label: LABELS.contact, icon: <FcContacts className={className} /> },
 ]

@@ -25,3 +25,64 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+.unreset h1,
+.unreset h2,
+.unreset h3,
+.unreset h4,
+.unreset h5,
+.unreset h6 {
+    font-size: large;
+    font-weight: 700;
+}
+
+.unreset ol, .unreset ul {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+}
+.unreset img,
+.unreset svg,
+.unreset video,
+.unreset canvas,
+.unreset audio,
+.unreset iframe,
+.unreset embed,
+.unreset object {
+  display: inline;
+  vertical-align: auto;
+}
+.unreset img, .unreset video {
+  max-width: 100%;
+  height: auto;
+};
+
+.unreset blockquote,
+.unreset dl,
+.unreset dd,
+.unreset h1,
+.unreset h2,
+.unreset h3,
+.unreset h4,
+.unreset h5,
+.unreset h6,
+.unreset figure,
+.unreset p,
+.unreset pre {
+  margin: auto;
+}
+
+.unreset *, .unreset ::before, .unreset ::after {
+  border-width: 0;
+  border-style: solid;
+  /* border-color: theme('borderColor.DEFAULT', currentColor); */
+}
+
+.unreset hr {
+  @apply col-span-1 md:col-span-2 my-6 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50;
+}
+
+.unreset img + img {
+  margin-top: 1rem;
+}
