@@ -1,20 +1,11 @@
 import Card from "@/components/card";
 import { CONTACTS } from "@/constants/contact";
 
-
-
-
 export default function Contact() {
   return (
     <Card className="mt-8 md:mt-0 md:ml-14">
-      {/* <section className="bg-white dark:bg-gray-900 rounded"> */}
       <section className="rounded">
         <div className="container px-6 py-4 mx-auto">
-          {/* <div>
-            <h3 className="text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Get in touch</h3>
-            <p className="mt-3 text-gray-500 dark:text-gray-400">Always here to talk.</p>
-          </div> */}
-
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
             {CONTACTS.map(({ key, label, icon: Icon, info, description, href }) => (
               <a

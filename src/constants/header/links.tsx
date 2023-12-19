@@ -1,5 +1,5 @@
 import { FaHome } from "react-icons/fa";
-import { FcAbout, FcContacts } from "react-icons/fc";
+import { FcContacts } from "react-icons/fc";
 import { MdWorkHistory } from "react-icons/md";
 
 const className = "w-6 h-6"

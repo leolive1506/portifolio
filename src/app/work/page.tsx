@@ -1,5 +1,5 @@
 import Card from '@/components/card'
-import { EXPERIENCES } from '@/constants/contact/experiences';
+import { EXPERIENCES } from '@/constants/work/experiences';
 import { IPinnedRepositoriesGithubApi } from '@/interfaces/PinnedRepositoriesGithubApi';
 import { getApolloClient, queryPinnedItems } from '@/services/apollo';
 
